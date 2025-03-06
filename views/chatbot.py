@@ -1,13 +1,6 @@
 import  streamlit as st
 from ollama import chat
 
-col1, col2, col3 = st.columns(3)
-
-con1 = st.container(height=110,border=100)
-
-con1.write("Welcome to Chat bot --> DeepSeek-R1")
-
-
 
 if 'messages' not in st.session_state:
     st.session_state.messages = []
