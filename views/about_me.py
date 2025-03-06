@@ -1,4 +1,5 @@
 import streamlit as st
+from fn import stream_data
 @st.dialog('Contace Me')
 def show_contact_from():
     st.text_input("Frist Name")
@@ -17,9 +18,12 @@ with col2:
 
 st.write("\n")
 info_01 = st.button("Information!")
+
+info__ = """
+เรียนอาจารย์ อาจารย์ ดร.วิชิต สมบัติ และ อาจารย์ ประจำวิชาทุกท่าน\n
+:material/settings: ใช้ AI Moel : DeepSeek-R1 เพราะเป็นตัวที่ดีตอบคำถามได้อย่างครบถ้วน และไม่กินพื้นที่ทรัพยากร")
+"""
+
 if info_01:
-    st.markdown('เรียนอาจารย์ อาจารย์ ดร.วิชิต สมบัติ และ อาจารย์ ประจำวิชาทุกท่าน')
-    st.markdown(":material/settings: ใช้ AI Moel : DeepSeek-R1 เพราะเป็นตัวที่ดีตอบคำถามได้อย่างครบถ้วน และไม่กินพื้นที่ทรัพยากร")
-    col = st.columns(3)
-    with col[1]:
-        st.markdown('Function การทำงาน')
+    st.write(stream_data(info__))
+

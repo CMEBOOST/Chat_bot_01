@@ -2,6 +2,8 @@ import  streamlit as st
 from ollama import chat
 
 
+
+
 if 'messages' not in st.session_state:
     st.session_state.messages = []
 
