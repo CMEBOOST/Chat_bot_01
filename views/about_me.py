@@ -1,14 +1,11 @@
-import time
 import streamlit as st
 from fn import stream_data
-from datetime import datetime
 from myinfo import info_01,info_02,info_03
-
+from forms.contact import contact_form
 
 @st.dialog('Contace Me')
 def show_contact_from():
-    st.text_input("Frist Name")
-
+    contact_form()
 col1, col2 = st.columns(2, gap="small", vertical_alignment="center")
 
 with col1:

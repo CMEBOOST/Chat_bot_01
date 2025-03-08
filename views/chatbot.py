@@ -1,5 +1,14 @@
 import streamlit as st
+import pandas as pd
 from ollama import chat
+import os
+
+LOG_FILE = "chat_logs.csv"
+
+if os.path.exists(LOG_FILE):
+    chat_logs = pd.read_csv(LOG_FILE)
+else:
+    chat_logs = pd.DataFrame(columns=["Chat", "Role", "Message"])
 
 cols = st.columns(2)
 
@@ -28,10 +37,10 @@ with cols[1]:
         if st.button("✅ Confirm Add Chat"):
             if new_chat_name and new_chat_name not in st.session_state.chat_list:
                 st.session_state.chat_list.append(new_chat_name)
-                st.session_state.chat_sessions[new_chat_name] = []  # สร้าง session ให้แชทใหม่
-                st.session_state.show_add_chat = False  # ซ่อนช่องเพิ่มแชทหลังจากเพิ่มแล้ว
+                st.session_state.chat_sessions[new_chat_name] = [] 
+                st.session_state.show_add_chat = False 
 
-# สร้าง state ของแต่ละแชทแยกกัน
+#สร้่างแยกกัน
 if 'chat_sessions' not in st.session_state:
     st.session_state.chat_sessions = {}
 if select_chat not in st.session_state.chat_sessions:
@@ -50,12 +59,17 @@ for message in st.session_state.chat_sessions[select_chat]:
 
 # รับข้อความจากผู้ใช้
 user_message = st.chat_input("Type something...")
+
 if user_message:
     st.session_state.chat_sessions[select_chat].append({
         'role': 'user',
         'content': user_message
     })
+    chat_logs = pd.concat([chat_logs, pd.DataFrame([[select_chat, 'user', user_message]], columns=["Chat", "Role", "Message"])], ignore_index=True)
+    chat_logs.to_csv(LOG_FILE, index=False)
+    
     with st.chat_message(name='user'):
+        st.image("assets/pic.jpg")
         st.write(user_message)
     
     with st.chat_message("assistant"):
@@ -69,3 +83,9 @@ if user_message:
         response_container.markdown(full_response)
     
     st.session_state.chat_sessions[select_chat].append({"role": "assistant", "content": full_response})
+    chat_logs = pd.concat([chat_logs, pd.DataFrame([[select_chat, 'assistant', full_response]], columns=["Chat", "Role", "Message"])], ignore_index=True)
+    chat_logs.to_csv(LOG_FILE, index=False)
+
+
+bottom_placeholder = st.empty()
+bottom_placeholder.write(" Chat logs saved to file: `chat_logs.csv`")
