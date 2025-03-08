@@ -1,5 +1,15 @@
 import streamlit as st
+import pandas as pd
 from ollama import chat
+import os
+
+LOG_FILE = "chat_logs.csv"
+
+# โหลด log เดิมถ้ามี
+if os.path.exists(LOG_FILE):
+    chat_logs = pd.read_csv(LOG_FILE)
+else:
+    chat_logs = pd.DataFrame(columns=["Chat", "Role", "Message"])
 
 cols = st.columns(2)
 
@@ -50,11 +60,15 @@ for message in st.session_state.chat_sessions[select_chat]:
 
 # รับข้อความจากผู้ใช้
 user_message = st.chat_input("Type something...")
+
 if user_message:
     st.session_state.chat_sessions[select_chat].append({
         'role': 'user',
         'content': user_message
     })
+    chat_logs = pd.concat([chat_logs, pd.DataFrame([[select_chat, 'user', user_message]], columns=["Chat", "Role", "Message"])], ignore_index=True)
+    chat_logs.to_csv(LOG_FILE, index=False)
+    
     with st.chat_message(name='user'):
         st.write(user_message)
     
@@ -69,3 +83,9 @@ if user_message:
         response_container.markdown(full_response)
     
     st.session_state.chat_sessions[select_chat].append({"role": "assistant", "content": full_response})
+    chat_logs = pd.concat([chat_logs, pd.DataFrame([[select_chat, 'assistant', full_response]], columns=["Chat", "Role", "Message"])], ignore_index=True)
+    chat_logs.to_csv(LOG_FILE, index=False)
+
+
+bottom_placeholder = st.empty()
+bottom_placeholder.write(" Chat logs saved to file: `chat_logs.csv`")

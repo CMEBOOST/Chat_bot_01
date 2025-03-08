@@ -21,11 +21,16 @@ project_2_page = st.Page(
     title='Log na',
     icon=':material/settings:',
 )
+project_3_page = st.Page(
+    page="views/cahtbot_test.py",
+    title='Chat bot test',
+    icon=':material/settings:',
+)
 
 pg =st.navigation(
     {
         "info":[about_page],
-        "Project":[project_1_page, project_2_page]
+        "Project":[project_1_page, project_2_page,project_3_page]
     }
 )
 

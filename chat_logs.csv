@@ -1,0 +1,8 @@
+Chat,Role,Message
+chat_1,user,heelo
+chat_1,assistant,"<think>
+
+</think>
+
+Hello! How can I assist you today? 😊"
+chat_1,user,hello

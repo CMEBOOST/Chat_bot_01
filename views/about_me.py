@@ -1,8 +1,8 @@
 import time
 import streamlit as st
-from fn import stream_data,time_naja
+from fn import stream_data
 from datetime import datetime
-
+from myinfo import info_01,info_02,info_03
 
 
 @st.dialog('Contace Me')
@@ -22,16 +22,18 @@ with col2:
         show_contact_from()
 
 st.write("\n")
-info_01 = st.button("Information!")
+info_00 = st.button("Information!")
 
-info__ = """
-:material/settings: ใช้ AI Moel : DeepSeek-R1 เพราะเป็นตัวที่ดีตอบคำถามได้อย่างครบถ้วน และไม่กินพื้นที่ทรัพยากร
-*Function ที่มี*
-- asdsadasdasd
-- asdasdjsahdjahsdsa
-- asdmkasjdiasjdoijasodijas
-"""
 
-if info_01:
+if info_00:
     st.markdown('**เรียนอาจารย์ อาจารย์ ดร.วิชิต สมบัติ และ อาจารย์ ประจำวิชาทุกท่าน**')
-    st.write(stream_data(info__))
+    st.write(stream_data(info_03))
+    coll = st.columns(2)
+    con1 = st.container(border=True)
+    with coll[0]:
+        con = st.container(border=True)
+        con.write(stream_data(info_02))
+    with coll[1]:
+        con1 = st.container(border=True)
+        con1.write(stream_data(info_02))
+
