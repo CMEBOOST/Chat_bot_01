@@ -16,7 +16,7 @@ def is_valid_email(email):
 def contact_form():
     with st.form("contact_form"):
         name = st.text_input("First Name")
-        email = st.text_input("Email Address")
+        email = st.text_input("Your email Address")
         message = st.text_area("Your Message")
         submit_button = st.form_submit_button("Submit")
 
@@ -26,19 +26,19 @@ def contact_form():
             st.stop()
 
         if not name:
-            st.error("Please provide your name.", icon="🧑")
+            st.error("invalid  your name.", icon="🧑")
             st.stop()
 
         if not email:
-            st.error("Please provide your email address.", icon="📨")
+            st.error("invalid  address.", icon="📨")
             st.stop()
 
         if not is_valid_email(email):
-            st.error("Please provide a valid email address.", icon="📧")
+            st.error("invalid email address.", icon="📧")
             st.stop()
 
         if not message:
-            st.error("Please provide a message.", icon="💬")
+            st.error("invalid message.", icon="💬")
             st.stop()
 
         # Prepare the data payload and send it to the specified webhook URL

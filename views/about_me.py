@@ -1,6 +1,6 @@
 import streamlit as st
 from fn import stream_data
-from myinfo import info_01,info_02,info_03
+from myinfo import *
 from forms.contact import contact_form
 
 @st.dialog('Contace Me')
@@ -13,7 +13,8 @@ with col1:
 with col2:
     st.header('OOP - ChatBOT',divider="gray")
     st.write(
-        "นาย สุรเชษฐ์ สีสา ระหัสนักศึกษา 67114540583"
+        "นาย สุรเชษฐ์ สีสา ระหัสนักศึกษา 67114540583\n"
+        "Email 📩: surachet.se.67@ubu.ac.th"
     )
     if st.button("💨 Contace Me"):
         show_contact_from()
@@ -32,5 +33,5 @@ if info_00:
         con.write(stream_data(info_02))
     with coll[1]:
         con1 = st.container(border=True)
-        con1.write(stream_data(info_02))
+        con1.write(stream_data(info_04))
 

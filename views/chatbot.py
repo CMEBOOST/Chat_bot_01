@@ -22,7 +22,7 @@ with cols[0]:
 
 with cols[1]:
     if 'chat_list' not in st.session_state:
-        st.session_state.chat_list = ['chat_1', 'chat_2']
+        st.session_state.chat_list = ['chat_1']
     
     select_chat = st.selectbox('Select Chat', st.session_state.chat_list)
     
@@ -69,7 +69,6 @@ if user_message:
     chat_logs.to_csv(LOG_FILE, index=False)
     
     with st.chat_message(name='user'):
-        st.image("assets/pic.jpg")
         st.write(user_message)
     
     with st.chat_message("assistant"):
@@ -88,4 +87,4 @@ if user_message:
 
 
 bottom_placeholder = st.empty()
-bottom_placeholder.write(" Chat logs saved to file: `chat_logs.csv`")
+bottom_placeholder.write(" Chat logs save to file: `chat_logs.csv`")

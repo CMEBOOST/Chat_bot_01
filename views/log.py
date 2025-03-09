@@ -4,7 +4,7 @@ import os
 
 LOG_FILE = "chat_logs.csv"
 
-st.title("Chat Logs Viewer")
+st.title("Chat Logs")
 
 if os.path.exists(LOG_FILE):
     chat_logs = pd.read_csv(LOG_FILE)

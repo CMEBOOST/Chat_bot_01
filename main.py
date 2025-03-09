@@ -27,10 +27,16 @@ project_3_page = st.Page(
     icon=':material/settings:',
 )
 
+project_4_page = st.Page(
+    page="views/summery.py",
+    title='Summery',
+    icon=':material/clear_all:',
+)
+
 pg =st.navigation(
     {
         "info":[about_page],
-        "Project":[project_1_page, project_2_page,project_3_page]
+        "Project":[project_1_page, project_2_page,project_4_page]
     }
 )
 
